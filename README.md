@@ -1,4 +1,3 @@
-```markdown
 # SP Automation Script
 
 Este repositorio contiene un script diseñado para automatizar el manejo de Stored Procedures (SP), incluyendo su registro, documentación y control de versiones en un entorno de desarrollo estructurado.
@@ -18,7 +17,6 @@ Este repositorio contiene un script diseñado para automatizar el manejo de Stor
 - Acceso a un repositorio Git para almacenar los cambios.
 
 ## Estructura del Proyecto
-```
 
 📂 sps-vbolsa
 ├── 📂 Ejecuciones
@@ -29,29 +27,28 @@ Este repositorio contiene un script diseñado para automatizar el manejo de Stor
 │ ├── ejemplo_sp.sql
 └── SP_Documentation.md
 
-````
-
 ## Uso
 
 ### 1. Configuración Inicial
 
 1. Clona este repositorio en tu sistema local.
+
    ```bash
    git clone <URL_DEL_REPOSITORIO>
-````
+
+   ```
 
 2. Asegúrate de que las rutas definidas en el script (`BASE_PATH`, `REPO_BASE_PATH`) coincidan con tu entorno local.
 
 ### 2. Ejecución del Script
 
 1. Navega al directorio donde está el script.
-   ```bash
+
    cd C:/Users/fmachiavello/script
-   ```
+
 2. Ejecuta el script:
-   ```bash
+
    python script.py
-   ```
 
 ### 3. Interacción con el Script
 
@@ -77,7 +74,6 @@ El script realizará las siguientes acciones:
 
 ## Ejemplo de Salida
 
-```
 Ingresa la versión de la carpeta de ejecuciones (por ejemplo, 11.1.7): v11.1.7
 ¿El SP ya está creado? (s/n): s
 Estado de ejecución (e/f): e
@@ -87,7 +83,6 @@ Número de ticket asociado: SDP-12345
 Registro actualizado en: C:/Users/fmachiavello/sps-vbolsa/Ejecuciones/v11.1.7/SP_Registro.md
 Documentación actualizada correctamente, con doble tabulación en las nuevas entradas.
 Cambios subidos al repositorio.
-```
 
 ## Contribuciones
 
@@ -97,10 +92,4 @@ Si deseas contribuir, por favor abre un issue o crea un pull request con tus sug
 
 Este proyecto está licenciado bajo los términos de la [MIT License](LICENSE).
 
----
-
 **Desarrollado por**: Franco Machiavello
-
-```
-
-```
