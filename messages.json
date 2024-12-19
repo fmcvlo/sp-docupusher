@@ -1,0 +1,14 @@
+{
+  "sp_exists": "¿El SP ya está creado? (s/n): ",
+  "execution_status": "Estado de ejecución (éxito/fallo): ",
+  "sp_name": "Nombre del SP (sin extensión): ",
+  "sp_content": "Contenido del SP (pega el código aquí):\n",
+  "description": "Descripción del SP: ",
+  "ticket": "Número de ticket asociado: ",
+  "error_empty_folder": "Error: La carpeta ./sps está vacía.",
+  "error_multiple_files": "Error: Hay más de un archivo en la carpeta ./sps. Asegúrate de que solo haya uno.",
+  "sp_moved": "SP movido desde {source} a {target}",
+  "sp_created": "SP creado en: {path}",
+  "log_updated": "Registro actualizado en: {path}",
+  "doc_updated": "Documentación actualizada correctamente."
+}
