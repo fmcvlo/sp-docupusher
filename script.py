@@ -81,29 +81,41 @@ def update_documentation_v2(sp_list, file_path):
         file.writelines(updated_lines)
     print(MESSAGES["doc_updated"])
 
-def save_or_copy_sp(ejecuciones_path, sp_content=None):
-    sp_files = [f for f in os.listdir(SCRIPT_PATH) if os.path.isfile(os.path.join(SCRIPT_PATH, f))]
+def save_or_copy_sp(ejecuciones_path, sp_exists, sp_content=None):
+    """
+    Maneja el SP según si ya está creado o no.
+    Si está creado, lo mueve desde `SCRIPT_PATH`.
+    Si no está creado, crea un nuevo archivo con el contenido proporcionado.
+    """
+    if sp_exists == "s":
+        # Verificar que la carpeta no esté vacía y tenga solo un archivo
+        sp_files = [f for f in os.listdir(SCRIPT_PATH) if os.path.isfile(os.path.join(SCRIPT_PATH, f))]
 
-    if len(sp_files) == 0:
-        print(MESSAGES["error_empty_folder"])
-        return None
-    elif len(sp_files) > 1:
-        print(MESSAGES["error_multiple_files"])
-        return None
+        if len(sp_files) == 0:
+            print(MESSAGES["error_empty_folder"])
+            return None
+        elif len(sp_files) > 1:
+            print(MESSAGES["error_multiple_files"])
+            return None
 
-    sp_filename = sp_files[0]
-    sp_source_path = os.path.join(SCRIPT_PATH, sp_filename)
-    sp_target_path = os.path.join(ejecuciones_path, sp_filename)
+        # Mover el archivo
+        sp_filename = sp_files[0]
+        sp_source_path = os.path.join(SCRIPT_PATH, sp_filename)
+        sp_target_path = os.path.join(SPS_PATH, sp_filename)
 
-    if sp_content is None:
         os.rename(sp_source_path, sp_target_path)
         print(MESSAGES["sp_moved"].format(source=sp_source_path, target=sp_target_path))
+        return sp_target_path, sp_filename
+
     else:
+        # Crear un nuevo archivo con el contenido proporcionado
+        sp_name = input(MESSAGES["sp_name"]).strip() + ".sql"
+        sp_target_path = os.path.join(SPS_PATH, sp_name)
+
         with open(sp_target_path, "w", encoding="utf-8") as sp_file:
             sp_file.write(sp_content)
         print(MESSAGES["sp_created"].format(path=sp_target_path))
-
-    return sp_target_path, sp_filename
+        return sp_target_path, sp_name
 
 def git_commit_and_push(commit_message):
     subprocess.run(["git", "-C", REPO_BASE_PATH, "add", "."], check=True)
@@ -122,14 +134,15 @@ if __name__ == "__main__":
     if sp_exists == "s":
         result = save_or_copy_sp(ejecuciones_path)
     else:
-        sp_name = input(MESSAGES["sp_name"]).strip()
         sp_content = input(MESSAGES["sp_content"])
-        result = save_or_copy_sp(ejecuciones_path, sp_content=sp_content)
+        result = save_or_copy_sp(ejecuciones_path, sp_exists, sp_content=sp_content)
 
     if not result:
         exit(1)
 
     sp_filepath, sp_name = result
+    print("sp_filepath: ", sp_filepath)
+    print("sp_filepath: ", sp_name)
     execution_status = input(MESSAGES["execution_status"]).strip().lower()
     execution_status = "éxito" if execution_status == "éxito" else "fallo"
     notes = input("Notas adicionales (opcional): ").strip()
@@ -139,5 +152,5 @@ if __name__ == "__main__":
     description = input(MESSAGES["description"]).strip()
     ticket = input(MESSAGES["ticket"]).strip()
     update_documentation_v2([(sp_name.replace('.sql', ''), description, ticket)], DOCUMENTATION_FILE)
-
-    git_commit_and_push(f"Registro y documentación del SP {sp_name}")
+    
+    #git_commit_and_push(f"Registro y documentación del SP {sp_name}")
