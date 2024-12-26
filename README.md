@@ -1,4 +1,4 @@
-# SP Automation Script
+# SP Docupusher
 
 Este repositorio contiene un script diseñado para automatizar el manejo de Stored Procedures (SP), incluyendo su registro, documentación y control de versiones en un entorno de desarrollo estructurado.
 
